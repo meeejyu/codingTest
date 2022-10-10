@@ -58,10 +58,10 @@ import org.junit.jupiter.api.Test;
     new_id에 나타날 수 있는 특수문자는 -_.~!@#$%^&*()=+[{]}:?,<>/ 로 한정됩니다.
  * 
  */
-public class NewIdRecommend {
+public class NewIdRecommendTest {
     
     @Test
-    public void gogo() {
+    public void testCase() {
         mySolution("...!@BaT#*..y.abcdefghijklm");
         System.out.println("------------------------");
         realSolution("...!@BaT#*..y.abcdefghijklm");
