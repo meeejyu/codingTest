@@ -1,5 +1,10 @@
 package coding.test;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.jupiter.api.Test;
+
 /*
  * 테스트 규칙
  * 테스트 명 : 성격 유형 검사
@@ -161,6 +166,135 @@ package coding.test;
 
     따라서 "RCJA"를 return 해야 합니다.
  */
-public class  PersonalityTypeTest {
-    
+public class PersonalityTypeTest {
+
+   @Test
+   public String mySolution(String[] survey, int[] choices) {
+
+      Map<String, Object> pointMap = new HashMap<>();
+      String temp = "";
+
+      pointMap.put("R", 0);
+      pointMap.put("T", 0);
+      pointMap.put("C", 0);
+      pointMap.put("F", 0);
+      pointMap.put("J", 0);
+      pointMap.put("M", 0);
+      pointMap.put("A", 0);
+      pointMap.put("N", 0);
+
+      for (int i = 0; i < survey.length; i++) {
+
+         String str = "";
+         if (choices[i] < 4) {
+            str = survey[i].substring(0, 1);
+         } else if (choices[i] > 4) {
+            str = survey[i].substring(1);
+         } else {
+            str = "pass";
+         }
+
+         if (!str.equals("pass")) {
+
+            int num = (int) pointMap.get(str);
+            if (choices[i] == 1 || choices[i] == 7) {
+               pointMap.put(str, num + 3);
+            }
+            if (choices[i] == 2 || choices[i] == 6) {
+               pointMap.put(str, num + 2);
+            }
+            if (choices[i] == 3 || choices[i] == 5) {
+               pointMap.put(str, num + 1);
+            }
+         }
+      }
+      // RT
+      if ((int) pointMap.get("R") >= (int) pointMap.get("T")) {
+         temp += "R";
+      } else {
+         temp += "T";
+      }
+
+      // CF
+      if ((int) pointMap.get("C") >= (int) pointMap.get("F")) {
+         temp += "C";
+      } else {
+         temp += "F";
+      }
+
+      // JM
+      if ((int) pointMap.get("J") >= (int) pointMap.get("M")) {
+         temp += "J";
+      } else{
+         temp += "M";
+      }
+
+      // AN
+      if ((int) pointMap.get("A") >= (int) pointMap.get("N")) {
+         temp += "A";
+      } else {
+         temp += "N";
+      }
+
+      String answer = "";
+      answer = temp;
+      return answer;
+   }
+
+   public String realSolution(String[] survey, int[] choices) {
+
+      Map<String, Object> pointMap = new HashMap<>();
+      String temp = "";
+
+      pointMap.put("R", 0);
+      pointMap.put("T", 0);
+      pointMap.put("C", 0);
+      pointMap.put("F", 0);
+      pointMap.put("J", 0);
+      pointMap.put("M", 0);
+      pointMap.put("A", 0);
+      pointMap.put("N", 0);
+
+      for (int i = 0; i < survey.length; i++) {
+         String str = "";
+         if (choices[i] < 4) {
+            str = survey[i].substring(0, 1);
+            pointMap.put(str, (int)pointMap.get(str)+4-choices[i]);
+         } else if(choices[i] > 4) {
+            str = survey[i].substring(1);
+            pointMap.put(str, (int)pointMap.get(str)-4+choices[i]);
+         }
+      }
+      // RT
+      if ((int) pointMap.get("R") >= (int) pointMap.get("T")) {
+         temp += "R";
+      } else {
+         temp += "T";
+      }
+
+      // CF
+      if ((int) pointMap.get("C") >= (int) pointMap.get("F")) {
+         temp += "C";
+      } else {
+         temp += "F";
+      }
+
+      // JM
+      if ((int) pointMap.get("J") >= (int) pointMap.get("M")) {
+         temp += "J";
+      } else{
+         temp += "M";
+      }
+
+      // AN
+      if ((int) pointMap.get("A") >= (int) pointMap.get("N")) {
+         temp += "A";
+      } else {
+         temp += "N";
+      }
+
+      String answer = "";
+      answer = temp;
+      return answer;
+   }
 }
