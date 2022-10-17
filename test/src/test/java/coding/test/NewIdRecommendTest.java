@@ -80,7 +80,7 @@ public class NewIdRecommendTest {
 
         //1단계
         test1 = new_id.toLowerCase();
-        String[] test1_array = test1.split("");
+        // String[] test1_array = test1.split("");
         System.out.println("test1 = " + test1);
 
         //2단계
