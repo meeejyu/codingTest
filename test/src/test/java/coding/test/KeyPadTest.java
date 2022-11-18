@@ -153,9 +153,9 @@ public class KeyPadTest {
 
         // 키패드 설정
         int[][] array = {{1,2,3}
-        ,{4,5,6}
-        ,{7,8,9}
-        ,{11,0,12}};
+                        ,{4,5,6}
+                        ,{7,8,9}
+                        ,{11,0,12}};
 
         System.out.println("배열확인"+array[3][0]);
 
@@ -170,7 +170,7 @@ public class KeyPadTest {
 
         // 센터 위치 저장
         int center_x;
-        int center_y;
+        int center_y = 1;
 
         int leftDistance = 0;
         int rightDistance = 0;
@@ -199,7 +199,6 @@ public class KeyPadTest {
             }
 
             if(2==number || 5==number || 8==number || 0==number) {
-                center_y = 1;
                 for (int i = 0; i < 4 ; i++) {
                     if(array[i][1]==number) {
                         center_x = i;
@@ -236,7 +235,8 @@ public class KeyPadTest {
 
     @Test
     public int calculation(int center_x, int center_y, int x, int y) {
-
+        
+        // 절대값 반환함수 Math.abs
         int distance = Math.abs(center_x - x) + Math.abs(center_y - y);
         return distance;
     }

@@ -127,30 +127,34 @@ public class DeclareResultTest {
     @Test
     public int[] realSolution(String[] id_list, String[] report, int k) {
 
-        int[] answer = new int[id_list.length];
-        Map<String, Integer> idMap = new HashMap<>();
-        Map<String, HashSet<String>> map = new HashMap<>();
-
-        for (int i = 0; i < id_list.length; i++) {
-            idMap.put(id_list[i], i);
-            map.put(id_list[i], new HashSet<>());
+        int[] answer = new int[id_list.length]; // 메일을 받은 횟수
+        Map<String, Integer> idMap = new HashMap<>(); // 유저 순서저장
+        Map<String, HashSet<String>> map = new HashMap<>(); // 각 유저별 자신을 신고한 유저 set
+        
+        // init
+        for(int i=0; i<id_list.length;i++){
+            idMap.put(id_list[i],i);
+            map.put(id_list[i],new HashSet<>());
         }
-
-        for(String s : report) {
-            map.get(s.split(" ")[1]).add(s.split(" ")[1]);
+        
+        // 자신을 신고한 유저이름 저장
+        for(String r : report){
+            String[] str = r.split(" ");
+            map.get(str[1]).add(str[0]);
         }
-
-        for (int i = 0; i < id_list.length; i++) {
-            HashSet<String> set = map.get(id_list[i]);
-            if(set.size() >= k) {
-                for(String id : set) {
-                    answer[idMap.get(id)]++;
+        
+        // 유저별 신고당한 횟수가 k보다 많으면 메일보냄
+        for(int i=0; i<id_list.length;i++){
+            HashSet<String> set = map.get(id_list[i]); // 해당 유저를 신고한 유저 set
+            if(set.size() >= k){
+                for(String userId : set){
+                    // userId가 동일한 순서 answer증가
+                    answer[idMap.get(userId)]++;
                 }
             }
         }
-
+        
         return answer;
-
     }
 
 }
