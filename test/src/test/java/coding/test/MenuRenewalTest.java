@@ -81,11 +81,12 @@ public class MenuRenewalTest {
 
     @Test
     public void testCase() {
-        String[] orders = { "ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH" };
+        // String[] orders = { "ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH" };
+        String[] orders = { "XYZ", "XWY", "WXA" };
         int[] course = { 2, 3, 4 };
         mySolution(orders, course);
         // realSolution(orders, course);
-
+        // System.out.println("뭐지? : " + "YZ".substring(1));
     }
 
     public String[] mySolution(String[] orders, int[] course) {
@@ -95,6 +96,7 @@ public class MenuRenewalTest {
             char[] arr = orders[i].toCharArray(); // char 형태로 변환
             Arrays.sort(arr); // 순서정렬
             orders[i] = String.valueOf(arr);
+            System.out.println("찍어보기 : " + orders[i]);
         }
 
         // 2. 각 order를 기준으로 courseLength 만큼의 조합 만들기

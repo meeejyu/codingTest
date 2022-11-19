@@ -10,25 +10,44 @@ public class PracticeTest {
     
     @Test
     public void testCase() {
-        String s = "one4seveneight";
-        realSolution(s);
+        // mySolution("...!@BaT#*..y.abcdefghijklm");
+        System.out.println("------------------------");
+        realSolution("...!@BaT#*..y.abcdefghijklm");
     }
 
+    // 코드 리팩토링
     @Test
-    private int realSolution(String s) {
-        String[] str = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-        String[] number = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    public String realSolution(String new_id) {
 
-        for (int i = 0; i < number.length; i++) {
-            if(s.contains(str[i])) {
-                s = s.replace(str[i], number[i]);
+        String answer = "";
+
+        String temp = new_id.toLowerCase();
+
+        temp = temp.replaceAll("[^-_.a-z0-9]", "");
+
+        temp = temp.replaceAll("[.]{2,}", ".");
+
+        temp = temp.replaceAll("^[.]|[.]$", "");
+
+        if(temp.equals("")) {
+            temp = "a";
+        }
+
+        if(temp.length() >= 16) {
+            temp = temp.substring(0, 15);
+            temp = temp.replaceAll("^[.]|[.]$", "");
+        }
+
+        if(temp.length() <= 2) {
+            while(temp.length() < 3) {
+                temp += temp.charAt(temp.length()-1);
             }
         }
 
-        int answer = Integer.parseInt(s);
-
-        System.out.println("answer = " + answer);
+        answer = temp;
+        
         return answer;
+
     }
 
 }
