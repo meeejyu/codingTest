@@ -230,6 +230,7 @@ public class ParkingFeeTest {
             int time = temp[2].equals("IN") ? -1 : 1;
             time *= timeToInt(temp[0]);
             map.put(temp[1], map.getOrDefault(temp[1], 0) + time);
+            System.out.println("map 확인1 : "+ map.toString());
         }
 
         // fees[0] 기본시간 fees[1] 기본요금 fees[2] 단위시간 fees[3] 단위요금

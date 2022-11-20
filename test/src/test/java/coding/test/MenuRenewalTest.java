@@ -102,7 +102,7 @@ public class MenuRenewalTest {
         // 2. 각 order를 기준으로 courseLength 만큼의 조합 만들기
         for (int courseLength : course) {
             for (String order : orders) {
-                System.out.println("order 확인 : " + order + " courseLength 확인 : " +courseLength);
+                // System.out.println("order 확인 : " + order + " courseLength 확인 : " +courseLength);
                 combination("", order, courseLength);
             }
 
@@ -141,8 +141,8 @@ public class MenuRenewalTest {
 
         // 0부터 length까지 조합
         for (int i = 0; i < others.length(); i++) {
-            System.out.println("맵 확인 콤비 카운트 " +count +  " 일때 : " +hashMap.toString());
-            System.out.println("재귀함수에 들어가는 값 " + (order + others.charAt(i)) +  " 2번 : " +others.substring(i + 1) + " 카운트 : "+ count );
+            // System.out.println("맵 확인 콤비 카운트 " +count +  " 일때 : " +hashMap.toString());
+            // System.out.println("재귀함수에 들어가는 값 " + (order + others.charAt(i)) +  " 2번 : " +others.substring(i + 1) + " 카운트 : "+ count );
             combination(order + others.charAt(i), others.substring(i + 1), count - 1);
         }
             
