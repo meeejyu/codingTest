@@ -79,14 +79,14 @@ public class QueueTest {
                 answer = -1;
                 break;
             }
-            if(sumA > sumAB/2) {
+            while(sumA > sumAB/2) {
                 int temp = q1.poll();
                 q2.add(temp);
                 sumA -= temp;
                 sumB += temp;
                 answer++;
             }
-            if(sumB > sumAB/2) {
+            while(sumB > sumAB/2) {
                 int temp = q2.poll();
                 q1.add(temp);
                 sumB -= temp;

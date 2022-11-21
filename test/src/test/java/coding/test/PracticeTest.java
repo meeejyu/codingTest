@@ -1,5 +1,6 @@
 package coding.test;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,80 +8,74 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.TreeMap;
 
 import org.junit.jupiter.api.Test;
 
 public class PracticeTest {
 
+    Queue<Integer> q1 = new ArrayDeque<>();
+    Queue<Integer> q2 = new ArrayDeque<>();
+
+    long sumQ1 = 0;
+    long sumQ2 = 0;
+    long sumQ12 = 0;
+
     @Test
     public void testCase() {
-        int[] fees = { 180, 5000, 10, 600 };
-        String[] records = { "05:34 5961 IN", "06:00 0000 IN", "06:34 0000 OUT", "07:59 5961 OUT", "07:59 0148 IN",
-                "18:59 0000 IN", "19:09 0148 OUT", "22:59 5961 IN", "23:00 5961 OUT" };
-        // mySolution(fees, records);
-        // realSolution(fees, records);
+        // int[] a = {3, 2, 7, 2};
+        // int[] b = {4, 6, 5, 1};
+        int[] a = {1, 2, 1, 2};
+        int[] b = {1, 10, 1, 2};
+        mySolution(a, b);
 
     }
+    
+    public int mySolution(int[] queue1, int[] queue2) {
 
-    public String realSolution(String[] survey, int[] choices) {
+        int answer = 0;
 
-        String temp = "";
-        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < queue2.length; i++) {
+            q1.add(queue1[i]);
+            sumQ1 += queue1[i];
+            q2.add(queue2[i]);
+            sumQ2 += queue2[i];
+        }
 
-        System.out.println(map.toString());
+        sumQ12 = sumQ1 + sumQ2;
 
-        map.put("R", 0);
-        map.put("T", 0);
-        map.put("C", 0);
-        map.put("F", 0);
-        map.put("J", 0);
-        map.put("M", 0);
-        map.put("A", 0);
-        map.put("N", 0);
+        if(sumQ1==sumQ2) {
+            return answer;
+        }
 
-        for (int i = 0; i < choices.length; i++) {
-            String type = "";
-
-            if(choices[i] > 4) {
-                type = survey[i].split("")[1];
-                map.put(type, map.get(type) + choices[i] - 4);
+        if(sumQ12%2!=0) {
+            answer = -1;
+            return answer;
+        }
+        
+        int maxCount = queue1.length*3;
+        while(sumQ1!=sumQ2) {
+            maxCount--;
+            if(maxCount==0) {
+                answer = -1;
+                break;
             }
-            if(choices[i] < 4) {
-                type = survey[i].split("")[0];
-                map.put(type, map.get(type) - choices[i] + 4);
+            while(sumQ1 > sumQ12/2) {
+                int temp = q1.poll();
+                q2.add(temp);
+                sumQ1 -= temp;
+                sumQ2 += temp;
+                answer++;
+            }
+            while(sumQ2 > sumQ12/2) {
+                int temp = q2.poll();
+                q1.add(temp);
+                sumQ2 -= temp;
+                sumQ1 += temp;
+                answer++;
             }
         }
-        System.out.println(map.toString());
-
-        if(map.get("R") >= map.get("T")) {
-            temp += "R";
-        }
-        else {
-            temp += "T";
-        }
-
-        if(map.get("C") >= map.get("F")) {
-            temp += "C";
-        }
-        else {
-            temp += "F";
-        }
-
-        if(map.get("J") >= map.get("M")) {
-            temp += "J";
-        }
-        else {
-            temp += "M";
-        }
-
-        if(map.get("A") >= map.get("N")) {
-            temp += "A";
-        }
-        else {
-            temp += "N";
-        }
-
-        return temp;
+        return answer;
     }
 }
