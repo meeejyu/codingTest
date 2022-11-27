@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 public class SmallNumTest {
     
     @Test
-    public void testCase() {
+    public void mySolution() {
 
         Scanner in = new Scanner(System.in);
 		int N = in.nextInt();

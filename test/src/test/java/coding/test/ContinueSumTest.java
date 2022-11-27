@@ -42,35 +42,80 @@ import org.junit.jupiter.api.Test;
 public class ContinueSumTest {
     
     @Test
-    public void testCase() {
+    private void mySolution() {
+        Scanner in = new Scanner(System.in);
+		// int N = in.nextInt();
+		int N = 10;
 
+        int[] X = new int[N];
+        for(int i = 0; i < N; i++) {
+            X[i] = in.nextInt();
+        }
+        // int[] X = {10, -4, 3, 1, 5, 6, -35, 12, 21, -1};
+        
+        HashSet<Integer> Y = new HashSet<>();
+        for(int i = 0 ; i < N ; i++) {
+            int A = X[i];
+            Y.add(A);
+            for (int j = i+1; j < N; j++) {
+                A = A + X[j];
+                Y.add(A);
+            }
+		}
+        Object[] ans = Y.toArray();
+        Arrays.sort(ans);
+        System.out.println(ans[ans.length-1]);
+    }
+
+    @Test
+    private void realSolution() {
         Scanner in = new Scanner(System.in);
 		// int N = in.nextInt();
 		int N = 10;
 
         int[] X = {10, -4, 3, 1, 5, 6, -35, 12, 21, -1};
         
-        // int[] X = new int[N];
-        // for(int i = 0; i < N; i++) {
-            // X[i] = in.nextInt();
-        // }
-        HashSet<Integer> Y = new HashSet<>();
-        // int yLength = ((N*(N+1))/2)+1;
-		// int[] Y = new int[yLength];
-        int count = 0;
-        for(int i = 0 ; i < N ; i++) {
-            int A = X[i];
-            count = count+1;
-            Y.add(A);
-            // Y[count] = A;
-            for (int j = i+1; j < N; j++) {
-                A = A + X[j];
-                // Y[count] = A;
-                count = count+1;
-                Y.add(A);
+        int sum = 0;
+        int max = Integer.MIN_VALUE;
+        for(int i = 0; i < N; i++) {
+            // int num = in.nextInt();
+            int num = X[i];
+            sum += num;
+            max = Math.max(num, sum);
+            if(sum<0) {
+                sum=0;
             }
-		}
-        Arrays.sort(Y);
-        System.out.print(Y[yLength-1]);
-    }    
+        }
+        System.out.println(max);
+    }
 }
+
+/*
+    제출한 코드
+        import java.util.Scanner;
+    import java.util.Arrays;
+    import java.util.HashSet;
+
+
+    public class Main {
+    
+        public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+		int N = in.nextInt();
+
+        int sum = 0;
+        int max = Integer.MIN_VALUE;
+        for(int i = 0; i < N; i++) {
+            int num = in.nextInt();
+            sum += num;
+            max = Math.max(max, sum);
+            if(sum<0) {
+                sum=0;
+            }
+        }
+        System.out.println(max);
+        }
+    }
+
+ */
+
